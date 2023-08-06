@@ -5,6 +5,7 @@
 package supermarket.layerd.service;
 
 import supermarket.layerd.service.custom.impl.CustomerServiceImpl;
+import supermarket.layerd.service.custom.impl.ItemServiceImpl;
 
 /**
  *
@@ -28,12 +29,14 @@ public class ServiceFactory {
         switch (type) {
             case CUSTOMER:
                 return new CustomerServiceImpl();
+            case ITEM:
+                return new ItemServiceImpl();
             default:
                 return null;
         }
     }
     
     public enum ServiceType{
-        CUSTOMER
+        CUSTOMER, ITEM
     }
 }
