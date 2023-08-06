@@ -4,16 +4,25 @@
  */
 package supermarket.layerd.view;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import supermarket.layerd.controller.CustomerController;
+import supermarket.layerd.dto.CustomerDto;
+
 /**
  *
  * @author anjanathrishakya
  */
 public class CustomerPanel extends javax.swing.JPanel {
 
+    private CustomerController customerController;
+
     /**
      * Creates new form CustomerPanel
      */
     public CustomerPanel() {
+        customerController = new CustomerController();
         initComponents();
     }
 
@@ -282,19 +291,19 @@ public class CustomerPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        
+        saveCustomer();
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-      
+
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-       
+
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void customerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerTableMouseClicked
-        
+
     }//GEN-LAST:event_customerTableMouseClicked
 
 
@@ -328,4 +337,40 @@ public class CustomerPanel extends javax.swing.JPanel {
     private javax.swing.JPanel tablePanel;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
+
+    private void saveCustomer() {
+        CustomerDto customer = new CustomerDto(
+                custIdText.getText(),
+                custTitleText.getText(),
+                custNameText.getText(),
+                custDobText.getText(),
+                Double.parseDouble(custSalaryText.getText()),
+                custAddressText.getText(),
+                custCityText.getText(),
+                custProvinceText.getText(),
+                custZipText.getText());
+
+        try {
+            String resp = customerController.saveCustomer(customer);
+            JOptionPane.showMessageDialog(this, resp);
+            clear();
+
+        } catch (Exception ex) {
+            Logger.getLogger(CustomerPanel.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+
+        }
+    }
+    
+    private void clear() {
+        custIdText.setText("");
+        custTitleText.setText("");
+        custNameText.setText("");
+        custDobText.setText("");
+        custSalaryText.setText("");
+        custAddressText.setText("");
+        custCityText.setText("");
+        custProvinceText.setText("");
+        custZipText.setText("");
+    }
 }
