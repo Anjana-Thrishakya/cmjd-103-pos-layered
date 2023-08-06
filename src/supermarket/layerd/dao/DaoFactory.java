@@ -6,6 +6,8 @@ package supermarket.layerd.dao;
 
 import supermarket.layerd.dao.custom.impl.CustomerDaoImpl;
 import supermarket.layerd.dao.custom.impl.ItemDaoImpl;
+import supermarket.layerd.dao.custom.impl.OrderDaoImpl;
+import supermarket.layerd.dao.custom.impl.OrderDetailDaoImpl;
 
 /**
  *
@@ -32,12 +34,16 @@ public class DaoFactory {
                 return new CustomerDaoImpl();
             case ITEM:
                 return new ItemDaoImpl();
+            case ORDER:
+                return  new OrderDaoImpl();
+            case ORDERDETAILS:
+                return new OrderDetailDaoImpl();
             default:
                 return null;
         }
     }
     
     public enum DaoTypes{
-        CUSTOMER, ITEM
+        CUSTOMER, ITEM, ORDER, ORDERDETAILS
     }
 }

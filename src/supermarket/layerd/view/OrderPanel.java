@@ -12,9 +12,11 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import supermarket.layerd.controller.CustomerController;
 import supermarket.layerd.controller.ItemController;
+import supermarket.layerd.controller.OrderController;
 import supermarket.layerd.dto.CustomerDto;
 import supermarket.layerd.dto.ItemDto;
 import supermarket.layerd.dto.OrderDetailDto;
+import supermarket.layerd.dto.OrderDto;
 
 /**
  *
@@ -24,6 +26,7 @@ public class OrderPanel extends javax.swing.JPanel {
 
     private CustomerController customerController;
     private ItemController itemController;
+    private OrderController orderController;
 
     private ArrayList<OrderDetailDto> orderDetailDtos = new ArrayList<>();
 
@@ -33,6 +36,7 @@ public class OrderPanel extends javax.swing.JPanel {
     public OrderPanel() {
         customerController = new CustomerController();
         itemController = new ItemController();
+        orderController = new OrderController();
         initComponents();
         loadTable();
     }
@@ -290,6 +294,7 @@ public class OrderPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_addItemButton1ActionPerformed
 
     private void placeOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderButtonActionPerformed
+        placeOrder();
     }//GEN-LAST:event_placeOrderButtonActionPerformed
 
 
@@ -382,6 +387,17 @@ public class OrderPanel extends javax.swing.JPanel {
         qtyText.setText("");
         discountText.setText("");
         itemDataLabel.setText("");
+    }
+
+    private void placeOrder() {
+        try {
+            OrderDto orderDto = new OrderDto(orderIdText.getText(), customerIdText.getText(), orderDetailDtos);
+            String resp = orderController.placeOrder(orderDto);
+            JOptionPane.showMessageDialog(this, resp);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+            Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
