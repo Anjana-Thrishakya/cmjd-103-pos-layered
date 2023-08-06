@@ -4,6 +4,8 @@
  */
 package supermarket.layerd.service.custom.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import supermarket.layerd.dao.DaoFactory;
 import supermarket.layerd.dao.custom.CustomerDao;
 import supermarket.layerd.dto.CustomerDto;
@@ -28,6 +30,35 @@ public class CustomerServiceImpl implements CustomerService{
         
         
         return customerDao.add(entity) ? "Success" : "Fail";
+    }
+
+    @Override
+    public ArrayList<CustomerDto> getAllCustomer() throws Exception {
+        List<CustomerEntity> customerEntitys = customerDao.getAll();
+        ArrayList<CustomerDto> customerDtos = new ArrayList<>();
+        
+        for (CustomerEntity entity : customerEntitys) {
+            customerDtos.add(new CustomerDto(entity.getId(), 
+                    entity.getTitle(), entity.getName(),
+                    entity.getDob(),
+                    entity.getSalary(), entity.getAddress(), 
+                    entity.getCity(), entity.getProvince(), entity.getZip()));
+        }
+        
+        return customerDtos;
+    }
+
+    @Override
+    public CustomerDto searchCustomer(String custId) throws Exception{
+        CustomerEntity entity = customerDao.get(custId);
+        
+        CustomerDto dto = new CustomerDto(entity.getId(), 
+                    entity.getTitle(), entity.getName(),
+                    entity.getDob(),
+                    entity.getSalary(), entity.getAddress(), 
+                    entity.getCity(), entity.getProvince(), entity.getZip());
+        
+        return dto;
     }
     
 }
