@@ -4,6 +4,7 @@
  */
 package supermarket.layerd.service.custom;
 
+import supermarket.layerd.dto.CustomerDto;
 import supermarket.layerd.service.SuperService;
 
 /**
@@ -11,5 +12,5 @@ import supermarket.layerd.service.SuperService;
  * @author anjanathrishakya
  */
 public interface CustomerService extends SuperService{
-    
+    public String addCustomer(CustomerDto customerDto) throws Exception;
 }

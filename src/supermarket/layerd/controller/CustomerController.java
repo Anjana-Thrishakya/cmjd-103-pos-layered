@@ -5,6 +5,8 @@
 package supermarket.layerd.controller;
 
 import supermarket.layerd.dto.CustomerDto;
+import supermarket.layerd.service.ServiceFactory;
+import supermarket.layerd.service.custom.CustomerService;
 
 /**
  *
@@ -12,9 +14,10 @@ import supermarket.layerd.dto.CustomerDto;
  */
 public class CustomerController {
     
+    private CustomerService customerService = (CustomerService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.CUSTOMER);
     
     public String saveCustomer(CustomerDto customerDto) throws Exception{
-        return null;
+        return customerService.addCustomer(customerDto);
     }
     
 }
