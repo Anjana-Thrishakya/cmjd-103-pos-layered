@@ -31,6 +31,7 @@ public class LayoutView extends javax.swing.JFrame {
         headerLabel = new javax.swing.JLabel();
         navPanel = new javax.swing.JPanel();
         customerButton = new javax.swing.JButton();
+        orderButtom = new javax.swing.JButton();
         bodyPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,13 +70,24 @@ public class LayoutView extends javax.swing.JFrame {
             }
         });
 
+        orderButtom.setBackground(new java.awt.Color(51, 51, 255));
+        orderButtom.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        orderButtom.setText("Order");
+        orderButtom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderButtomActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout navPanelLayout = new javax.swing.GroupLayout(navPanel);
         navPanel.setLayout(navPanelLayout);
         navPanelLayout.setHorizontalGroup(
             navPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(customerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(navPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(customerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(orderButtom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         navPanelLayout.setVerticalGroup(
@@ -83,7 +95,9 @@ public class LayoutView extends javax.swing.JFrame {
             .addGroup(navPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(customerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(396, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(orderButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(345, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout bodyPanelLayout = new javax.swing.GroupLayout(bodyPanel);
@@ -137,6 +151,10 @@ public class LayoutView extends javax.swing.JFrame {
         loadCustomerPanel();
     }//GEN-LAST:event_customerButtonActionPerformed
 
+    private void orderButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderButtomActionPerformed
+        loadOrderPanel();
+    }//GEN-LAST:event_orderButtomActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel basePanel;
@@ -145,6 +163,7 @@ public class LayoutView extends javax.swing.JFrame {
     private javax.swing.JLabel headerLabel;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JPanel navPanel;
+    private javax.swing.JButton orderButtom;
     // End of variables declaration//GEN-END:variables
 
     private void loadCustomerPanel() {
@@ -152,6 +171,15 @@ public class LayoutView extends javax.swing.JFrame {
         CustomerPanel cp = new CustomerPanel();
         cp.setSize(bodyPanel.getWidth(), bodyPanel.getHeight());
         bodyPanel.add(cp);
+        bodyPanel.repaint();
+        bodyPanel.revalidate();
+    }
+
+    private void loadOrderPanel() {
+        bodyPanel.removeAll();
+        OrderPanel op = new OrderPanel();
+        op.setSize(bodyPanel.getWidth(), bodyPanel.getHeight());
+        bodyPanel.add(op);
         bodyPanel.repaint();
         bodyPanel.revalidate();
     }
